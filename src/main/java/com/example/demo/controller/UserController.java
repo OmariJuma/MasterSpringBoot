@@ -1,12 +1,14 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.example.demo.models.User;
+import com.example.demo.models.UserRequestDto;
+import com.example.demo.models.UserResponseDto;
 import com.example.demo.service.UserService;
 
 @RequestMapping("/api/v1/users")
@@ -19,11 +21,17 @@ public class UserController{
             }
             
     @PostMapping
-    public ResponseEntity<Object> getUsers(@RequestBody User user){
-        System.out.println(user.id +" " + user.name);
-        User createdUser = service.createUser(user.id, user.name);
+    public ResponseEntity<UserResponseDto> getUsers(@RequestBody UserRequestDto user){
+        UserResponseDto createdUser = service.createUser(user);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
+    
+    @GetMapping
+    public ResponseEntity<List<UserResponseDto>> getAllUsers(){
+        return new ResponseEntity<>(service.getAllUsers(), HttpStatus.OK);    }
+        
+       // @PatchMapping
+       // public ResponseEntity<UserResponseDto> updateUser(@RequestBody User)
     
     
 }

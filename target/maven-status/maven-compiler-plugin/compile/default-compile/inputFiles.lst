@@ -1,8 +1,11 @@
 /data/data/org.smartide.code/files/home/projects/test/src/main/java/com/example/demo/DemoApplication.java
+/data/data/org.smartide.code/files/home/projects/test/src/main/java/com/example/demo/configuration/Config.java
 /data/data/org.smartide.code/files/home/projects/test/src/main/java/com/example/demo/controller/UserController.java
 /data/data/org.smartide.code/files/home/projects/test/src/main/java/com/example/demo/exception/ApiException.java
 /data/data/org.smartide.code/files/home/projects/test/src/main/java/com/example/demo/exception/ApiExceptionHandler.java
 /data/data/org.smartide.code/files/home/projects/test/src/main/java/com/example/demo/exception/ApiExceptionRequest.java
 /data/data/org.smartide.code/files/home/projects/test/src/main/java/com/example/demo/models/User.java
+/data/data/org.smartide.code/files/home/projects/test/src/main/java/com/example/demo/models/UserRequestDto.java
+/data/data/org.smartide.code/files/home/projects/test/src/main/java/com/example/demo/models/UserResponseDto.java
 /data/data/org.smartide.code/files/home/projects/test/src/main/java/com/example/demo/repository/UserRepository.java
 /data/data/org.smartide.code/files/home/projects/test/src/main/java/com/example/demo/service/UserService.java

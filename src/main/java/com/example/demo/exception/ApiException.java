@@ -1,13 +1,14 @@
 package com.example.demo.exception;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.ZoneId;
 
 import org.springframework.http.HttpStatus;
 
 public class ApiException {
     private String message;
     private HttpStatus errorCode;
-    private LocalDateTime timeStamp; 
+    private ZonedDateTime timeStamp; 
     
     public ApiException() {} 
     public String getMessage() {
@@ -25,11 +26,11 @@ public class ApiException {
     public HttpStatus getErrorCode() {
         return this.errorCode;
     }
-    public void setTimeStamp(LocalDateTime timeStamp) {
+    public void setTimeStamp(ZonedDateTime timeStamp) {
         this.timeStamp = timeStamp;
     }
 
-    public LocalDateTime getTimeStamp() {
+    public ZonedDateTime getTimeStamp() {
         return this.timeStamp; 
     }
 }
