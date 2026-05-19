@@ -7,6 +7,7 @@ import java.time.ZoneId;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.example.demo.exception.ApiExceptionRequest;
@@ -20,12 +21,9 @@ import com.example.demo.repository.*;
 public class UserService implements UserDetailsService {
     
     private  final UserRepository userRepository;
-    //private final PasswordEncoder passwordEncoder ;  
-    public UserService  (UserRepository userRepository
-    //, PasswordEncoder passwordEncoder
-    ){
+    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+    public UserService  (UserRepository userRepository){
         this.userRepository = userRepository;
-       // this.passwordEncoder =passwordEncoder;
     }
     
         @Override
@@ -45,12 +43,12 @@ return new UserPrincipal(user);
               throw new ApiExceptionRequest("User exists");
           }
           ZonedDateTime time = ZonedDateTime.now(ZoneId.of("Africa/Nairobi"));
-          //String hashedPass = passwordEncoder.encode(user.getPassword());
+          String hashedPass = encoder.encode(user.getPassword());
           User newUser = new User( );
           newUser.setId(user.getId());
           newUser.setName(user.getName());
           newUser.setEmail(user.getEmail());
-          newUser.setPassword(user.getPassword());
+          newUser.setPassword(hashedPass);
           newUser.setCreatedAt(time);
           newUser.setUpdatedAt(time);
        User createdUser = userRepository.save(newUser);
