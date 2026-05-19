@@ -4,16 +4,20 @@ import java.time.ZonedDateTime;
 import java.util.List;
 import java.time.ZoneId;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.example.demo.exception.ApiExceptionRequest;
 import com.example.demo.models.User;
+import com.example.demo.models.UserPrincipal;
 import com.example.demo.models.UserRequestDto;
 import com.example.demo.models.UserResponseDto;
 import com.example.demo.repository.*;
 
 @Service
-public class UserService{
+public class UserService implements UserDetailsService {
     
     private  final UserRepository userRepository;
     //private final PasswordEncoder passwordEncoder ;  
@@ -24,6 +28,17 @@ public class UserService{
        // this.passwordEncoder =passwordEncoder;
     }
     
+        @Override
+    public UserDetails loadUserByUsername( String username ) throws UsernameNotFoundException {
+        User user = userRepository.findByName(username);
+        
+        if(user == null){
+System.out.println("User Not Found");
+throw new UsernameNotFoundException("user not found");
+}
+return new UserPrincipal(user);
+        
+        }
       public UserResponseDto createUser(UserRequestDto user){
         
           if(userRepository.findById(user.getId()).isPresent()){
